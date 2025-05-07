@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>TODO List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-900 font-sans">
+<div class="container mx-auto p-6">
+    <div class="flex flex-col sm:flex-row justify-between items-center mb-6 space-y-4 sm:space-y-0">
+        <h1 class="text-4xl font-bold text-center sm:text-left">📝 TODO List</h1>
+        <a href="/add" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-5 py-2 rounded-md shadow transition">
+            ➕ Add Task
+        </a>
+    </div>
+
+    <div class="overflow-x-auto rounded-lg shadow">
+        <table class="min-w-full bg-gray-100 border border-gray-300 text-sm">
+            <thead class="bg-gray-200 text-gray-700 uppercase tracking-wider text-xs">
+                <tr>
+                    <th class="px-4 py-3 text-center border">ID</th>
+                    <th class="px-4 py-3 text-left border">Name</th>
+                    <th class="px-4 py-3 text-left border">Description</th>
+                    <th class="px-4 py-3 text-left border">Person</th>
+                    <th class="px-4 py-3 text-center border">Target Date</th>
+                    <th class="px-4 py-3 text-center border">Status</th>
+                    <th class="px-4 py-3 text-center border">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="text-gray-800 divide-y divide-gray-300">
+                <tr th:each="todo : ${todos}" class="hover:bg-gray-50 transition">
+                    <td class="px-4 py-3 text-center border" th:text="${todo.id}"></td>
+                    <td class="px-4 py-3 text-left border" th:text="${todo.name}"></td>
+                    <td class="px-4 py-3 text-left border" th:text="${todo.description}"></td>
+                    <td class="px-4 py-3 text-left border" th:text="${todo.personInCharge}"></td>
+                    <td class="px-4 py-3 text-center border" th:text="${todo.targetDate}"></td>
+                    <td class="px-4 py-3 text-center border">
+                        <span th:switch="${todo.status}">
+                            <span th:case="'Not Started'" class="bg-gray-400 text-white text-xs px-2 py-1 rounded-full">Not Started</span>
+                            <span th:case="'In Progress'" class="bg-yellow-400 text-white text-xs px-2 py-1 rounded-full">In Progress</span>
+                            <span th:case="'Completed'" class="bg-green-500 text-white text-xs px-2 py-1 rounded-full">Completed</span>
+                            <span th:case="*" class="text-gray-500">Unknown</span>
+                        </span>
+                    </td>
+                    <td class="px-4 py-3 text-center border">
+                        <div class="flex justify-center space-x-4">
+                            <a th:href="@{'/edit/' + ${todo.id}}" class="text-blue-600 hover:underline font-medium">Edit</a>
+                            <a th:href="@{'/delete/' + ${todo.id}}" class="text-red-600 hover:underline font-medium">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
