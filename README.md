@@ -159,9 +159,8 @@ This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-## 📸 Screenshots (Optional)
+## 📸 Screenshots 
 
-_Add screenshots of the app's main UI pages here._
 
 ---
 
